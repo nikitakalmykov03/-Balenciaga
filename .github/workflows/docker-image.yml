@@ -1,0 +1,26 @@
+name: Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }} .
+
+      - name: Login to GitHub Packages
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Publish Docker image
+        run: docker push ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+
+      - name: Run Docker image
+        run: docker run ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }}
