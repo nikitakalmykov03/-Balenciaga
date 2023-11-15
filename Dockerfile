@@ -1,4 +1,4 @@
 FROM python:3.8-slim
-COPY main.py /app/main.py
 WORKDIR /app
+COPY main.py /app/main.py
 CMD python main.py
