@@ -14,4 +14,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+            docker push ghcr.io/${GITHUB_REPOSITORY}:${GITHUB_SHA}
+            docker run -d --name ${GITHUB_ACTOR}_app -p 80:80 ghcr.io/${GITHUB_REPOSITORY}:${GITHUB_SHA}
+          
 
