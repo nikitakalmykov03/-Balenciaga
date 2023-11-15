@@ -17,10 +17,12 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }} .
 
       - name: Login to GitHub Packages
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com/nikitakalmykov03/https://github.com/nikitakalmykov03/-Balenciaga.git
 
       - name: Publish Docker image
         run: docker push ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }}
 
       - name: Run Docker image
         run: docker run ${{ secrets.DOCKER_REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+
+
