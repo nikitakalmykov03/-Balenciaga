@@ -17,3 +17,6 @@ jobs:
 
       - name: Push Docker image to GitHub Package Registry
         run: docker push docker.pkg.github.com/${{ github.repository }}/${{ github.sha }}
+      - name: Run Docker image
+        run: docker run docker.pkg.github.com/${{ github.repository }}/${{ github.sha }}
+
